@@ -1,0 +1,58 @@
+#配置服务器端口、网站名，
+server:
+  port: 9090
+  servlet:
+    context-path: /crm
+    session:
+      cookie:
+        path:
+        secure: false
+
+  #设置session存活时间，
+  reactive:
+    session:
+      timeout: 7200
+
+#配置Druid数据源，
+spring:
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/crmproject?useUnicode=true&characterEncoding=UTF-8&serverTimezone=GMT%2B8
+    druid:
+      username: root
+      password: rokai@021016
+      initial-size: 5
+      min-idle: 10
+      max-active: 20
+
+  #配置redis，
+  redis:
+    host: 192.168.31.231
+    port: 6379
+    #password: 123456
+
+  #配置Thymeleaf，
+  thymeleaf:
+    cache: false
+    prefix: classpath:/templates/
+    suffix: .html
+
+  #配置视图解析器，
+  mvc:
+    view:
+      prefix: /
+      suffix: .html
+
+  #配置静态资源，
+  resources:
+    web:
+      resources:
+        static-locations: classpath:/static/**
+
+#指定Mapper文件的位置，
+mybatis:
+  mapper-locations: classpath:mapper/*/*.xml
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true  #开启驼峰命名，
